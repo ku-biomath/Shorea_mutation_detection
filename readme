@@ -1,2 +1,2 @@
 This script compare four vcf files (gatk and samtools result from replicate 1 and 2) of respective threshold class.
-The script output two file, 1: names of site shared and having same genotypes in all four file; 2: number of site shared between all pairs of files and all files.
+The script output two file, 1: names of site shared and having same genotypes in all four file; 2: number of site shared and having same genotypes between all pairs of files and all files.
