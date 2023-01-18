@@ -1,0 +1,6 @@
+This script compares four vcf files (gatk and samtools result from replicate 1 and 2) of respective threshold classes.
+The script outputs two files: 1: names of sites shared and identical in genotype in all four files; 2: number of sites shared and identical in genotype between all pairs of files and all files.
+
+Usage
+
+python compare_vcf.py your_gatk_file1.vcf your_gatk_file2.vcf your_samtools_file1.vcf your_samtools_file2.vcf
