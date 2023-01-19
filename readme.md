@@ -39,6 +39,7 @@
 		vcftools --gzvcf norm_shorea2ndData_samtools_q20Q20.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q20Q20 --recode;
 
 ## SNP calling (gatk)
+* We also used gatk for SNP calling.
 
 		gatk CreateSequenceDictionary -R ${REF} -O hypo_assembly.dict;
 		seqkit seq -n ${REF} >intervals.list;
