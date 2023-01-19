@@ -28,3 +28,12 @@
 		bcftools norm -d all -f ${REF} -O z -o norm_shorea2ndData_samtools_q40Q40.vcf.gz shorea1stData_samtools_q40Q40.vcf.gz&
 		bcftools norm -d all -f ${REF} -O z -o norm_shorea2ndData_samtools_q30Q30.vcf.gz shorea1stData_samtools_q30Q30.vcf.gz&
 		bcftools norm -d all -f ${REF} -O z -o norm_shorea2ndData_samtools_q20Q20.vcf.gz shorea1stData_samtools_q20Q20.vcf.gz;
+
+* We divided SNPs and indels in vcf files.
+
+		vcftools --gzvcf norm_shorea2ndData_samtools_q40Q40.vcf.gz --max-missing 1 --max-alleles 2 --remove-indels --out SNP_norm_shorea2ndData_samtools_q40Q40 --recode&
+		vcftools --gzvcf norm_shorea2ndData_samtools_q30Q30.vcf.gz --max-missing 1 --max-alleles 2 --remove-indels --out SNP_norm_shorea2ndData_samtools_q30Q30 --recode&
+		vcftools --gzvcf norm_shorea2ndData_samtools_q20Q20.vcf.gz --max-missing 1 --max-alleles 2 --remove-indels --out SNP_norm_shorea2ndData_samtools_q20Q20 --recode;
+		vcftools --gzvcf norm_shorea2ndData_samtools_q40Q40.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q40Q40 --recode&
+		vcftools --gzvcf norm_shorea2ndData_samtools_q30Q30.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q30Q30 --recode&
+		vcftools --gzvcf norm_shorea2ndData_samtools_q20Q20.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q20Q20 --recode;
