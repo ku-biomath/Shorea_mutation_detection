@@ -1,6 +1,7 @@
-This script compares four vcf files (gatk and samtools result from replicate 1 and 2) of respective threshold classes.
-The script outputs two files: 1: names of sites shared and identical in genotype in all four files; 2: number of sites shared and identical in genotype between all pairs of files and all files.
+##Mutation detection method
 
-Usage
+####Data cleaning
 
-python compare_vcf.py your_gatk_file1.vcf your_gatk_file2.vcf your_samtools_file1.vcf your_samtools_file2.vcf
+*fastp was used to cleaning raw fastq data.
+
+		for filename in *1.fastq.gz; do indexNo=`basename ${filename} 1.fastq.gz`; echo ${indexNo}; fastp -i ${indexNo}1.fastq.gz -I ${indexNo}2.fastq.gz -3 -o ${indexNo}paired_1.fastq.gz -O ${indexNo}paired_2.fastq.gz -h ${indexNo}report.html -j ${indexNo}report.json -q 20 -n 10 -t 1 -T 1 -l 20 -w 16; done；
