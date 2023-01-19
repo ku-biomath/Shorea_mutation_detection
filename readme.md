@@ -1,6 +1,6 @@
-##Mutation detection method
+#Mutation detection method
 
-####Data cleaning
+##Data cleaning
 
 *fastp was used to cleaning raw fastq data.
 
