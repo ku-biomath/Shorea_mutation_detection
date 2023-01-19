@@ -41,7 +41,7 @@
 ## SNP calling (gatk)
 * We also used gatk for SNP calling.
 
-		gatk CreateSequenceDictionary -R ${REF} -O hypo_assembly.dict;
+		gatk CreateSequenceDictionary -R ${REF} -O Your_reference_file_name.dict;
 		seqkit seq -n ${REF} >intervals.list;
 		samtools faidx ${REF};
 		for fpath in *.bam; do fname=`basename ${fpath} .bam` ; echo ${fname}; done | sort |xargs -P4 -I{} gatk HaplotypeCaller -R ${REF} --emit-ref-confidence GVCF -I {}.bam -O {}.g.vcf;
