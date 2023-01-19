@@ -51,6 +51,7 @@
 		gatk GenotypeGVCFs -R ${REF} -V gendb://gvcfs_db -O merged.vcf;
 		
 * We divided and filtered SNPs and indels in vcf files. 
+
 		gatk SelectVariants -R ${REF} -V merged.vcf --select-type-to-include SNP -O merged_snps.vcf;
 		gatk VariantFiltration -R ${REF} -V merged_snps.vcf -O 1st_merged_snps_filtered.vcf \
                        -filter "QD < 2.0" --filter-name "QD2"       \
