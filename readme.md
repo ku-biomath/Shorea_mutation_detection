@@ -37,3 +37,14 @@
 		vcftools --gzvcf norm_shorea2ndData_samtools_q40Q40.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q40Q40 --recode&
 		vcftools --gzvcf norm_shorea2ndData_samtools_q30Q30.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q30Q30 --recode&
 		vcftools --gzvcf norm_shorea2ndData_samtools_q20Q20.vcf.gz --max-missing 1 --keep-only-indels --out indel_norm_shorea2ndData_samtools_q20Q20 --recode;
+
+## SNP calling (gatk)
+
+		gatk CreateSequenceDictionary -R ${REF} -O hypo_assembly.dict;
+		seqkit seq -n ${REF} >intervals.list;
+		samtools faidx ${REF};
+		for fpath in *.bam; do fname=`basename ${fpath} .bam` ; echo ${fname}; done | sort |xargs -P4 -I{} gatk HaplotypeCaller -R ${REF} --emit-ref-confidence GVCF -I {}.bam -O {}.g.vcf;
+		gvcf_files="";
+		for gvcf_file in *.g.vcf;do gvcf_files=${gvcf_files}"-V ${gvcf_file} ";done;
+		gatk GenomicsDBImport -R ${REF} ${gvcf_files} -L intervals.list --genomicsdb-workspace-path gvcfs_db;
+		gatk GenotypeGVCFs -R ${REF} -V gendb://gvcfs_db -O merged.vcf;
