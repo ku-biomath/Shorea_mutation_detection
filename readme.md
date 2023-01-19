@@ -49,3 +49,22 @@
 		for gvcf_file in *.g.vcf;do gvcf_files=${gvcf_files}"-V ${gvcf_file} ";done;
 		gatk GenomicsDBImport -R ${REF} ${gvcf_files} -L intervals.list --genomicsdb-workspace-path gvcfs_db;
 		gatk GenotypeGVCFs -R ${REF} -V gendb://gvcfs_db -O merged.vcf;
+		
+* We divided and filtered SNPs and indels in vcf files. 
+		gatk SelectVariants -R ${REF} -V merged.vcf --select-type-to-include SNP -O merged_snps.vcf;
+		gatk VariantFiltration -R ${REF} -V merged_snps.vcf -O 1st_merged_snps_filtered.vcf \
+                       -filter "QD < 2.0" --filter-name "QD2"       \
+                       -filter "QUAL < 30.0" --filter-name "QUAL30" \
+                       -filter "SOR > 4.0" --filter-name "SOR4"     \
+                       -filter "FS > 60.0" --filter-name "FS60"     \
+                       -filter "MQ < 40.0" --filter-name "MQ40"     \
+                       -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" \
+                       -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8";
+		
+		gatk SelectVariants -R ${REF} -V merged.vcf --select-type-to-include INDEL -O merged_indels.vcf;
+		gatk VariantFiltration -R ${REF} -V merged_indels.vcf -O 1st_merged_indels_filtered.vcf \
+                       -filter "QD < 2.0" --filter-name "QD2"       \
+                       -filter "QUAL < 30.0" --filter-name "QUAL30" \
+                       -filter "FS > 200.0" --filter-name "FS200"   \
+                       -filter "SOR > 10.0" -filter-name "SOR10"    \
+                       -filter "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20";
