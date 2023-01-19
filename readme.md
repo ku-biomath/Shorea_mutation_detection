@@ -29,7 +29,7 @@
 		bcftools norm -d all -f ${REF} -O z -o norm_shorea2ndData_samtools_q30Q30.vcf.gz shorea1stData_samtools_q30Q30.vcf.gz&
 		bcftools norm -d all -f ${REF} -O z -o norm_shorea2ndData_samtools_q20Q20.vcf.gz shorea1stData_samtools_q20Q20.vcf.gz;
 
-* We divided SNPs and indels in vcf files.
+* We divided SNPs and indels in the vcf files.
 
 		vcftools --gzvcf norm_shorea2ndData_samtools_q40Q40.vcf.gz --max-missing 1 --max-alleles 2 --remove-indels --out SNP_norm_shorea2ndData_samtools_q40Q40 --recode&
 		vcftools --gzvcf norm_shorea2ndData_samtools_q30Q30.vcf.gz --max-missing 1 --max-alleles 2 --remove-indels --out SNP_norm_shorea2ndData_samtools_q30Q30 --recode&
@@ -50,7 +50,7 @@
 		gatk GenomicsDBImport -R ${REF} ${gvcf_files} -L intervals.list --genomicsdb-workspace-path gvcfs_db;
 		gatk GenotypeGVCFs -R ${REF} -V gendb://gvcfs_db -O merged.vcf;
 		
-* We divided and filtered SNPs and indels in vcf files. 
+* We divided and filtered SNPs and indels in the vcf files. 
 
 		gatk SelectVariants -R ${REF} -V merged.vcf --select-type-to-include SNP -O merged_snps.vcf;
 		gatk VariantFiltration -R ${REF} -V merged_snps.vcf -O 1st_merged_snps_filtered.vcf \
@@ -69,3 +69,9 @@
                        -filter "FS > 200.0" --filter-name "FS200"   \
                        -filter "SOR > 10.0" -filter-name "SOR10"    \
                        -filter "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20";
+		       
+## Extracting shared SNP between two SNP caller and replicates.
+* We removed fixed sites from vcf the file using Tassel5.
+* After removing fixed sites, we extracted shared SNPs from four vcf files.
+
+		
