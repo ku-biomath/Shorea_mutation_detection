@@ -75,3 +75,6 @@
 * After removing fixed sites, we extracted shared SNPs from four vcf files.
 
 		python compare_vcf.py your_gatk_file1.vcf your_gatk_file2.vcf your_samtools_file1.vcf your_samtools_file2.vcf
+		
+## Manual check
+* We checked all SNPs manually using IGV.
