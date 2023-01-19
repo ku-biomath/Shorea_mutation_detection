@@ -11,7 +11,7 @@
 * We used bwa-mem2 for read mapping.
 * Maping and marking duplicates were conducted in one line.
 
-		REF=/media/imai2/ssd2/move/1stind/hypo_assembly.fasta
+		REF=Your reference genome
 		bwa-mem2 index ${REF};
 		for filename in *paired_1.fastq.gz; do indexNo=`basename ${filename} paired_1.fastq.gz`; echo ${indexNo}; bwa-mem2 mem -t 20 -R "@RG\tID:"${indexNo}"\tPL:ILLUMINA\tSM:"${indexNo} ${REF} ${indexNo}paired_1.fastq.gz ${indexNo}paired_2.fastq.gz | samtools fixmate -m - - | samtools sort -| samtools markdup -@8 --reference ${REF} - ${indexNo}.bam ; done;
 
