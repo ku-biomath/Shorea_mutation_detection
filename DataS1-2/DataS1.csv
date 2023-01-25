@@ -1,5 +1,5 @@
 ﻿Data S1. The final set of SNVs.,,,,,,,,,,,,,,
-Species: individual ID,Contig or scaffold ID,Position,Reference allele,Derived allele,0,1_1,1_2,2_1,2_1,3_1,3_2,4,New mutation,Drection of mutation
+Species: individual ID,Contig or scaffold ID,Position,Reference allele,Derived allele,0,1_1,1_2,2_1,2_2,3_1,3_2,4,New mutation,Drection of mutation
 S. laevis: F1,contig_10001,9954,A,G,0/0,0/0,0/0,0/0,0/0,0/0,0/0,0/1,4,A>G
 S. laevis: F1,contig_10029,303371,T,C,0/0,0/0,0/1,0/0,0/0,0/0,0/0,0/0,1-2,T>C
 S. laevis: F1,contig_10040,163391,C,T,0/0,0/0,0/0,0/0,0/1,0/0,0/0,0/0,2-2,C>T
